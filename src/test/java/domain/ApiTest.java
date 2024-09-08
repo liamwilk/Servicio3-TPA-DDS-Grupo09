@@ -5,6 +5,7 @@ import entities.persistentes.Documento;
 import entities.persistentes.TipoDocumento;
 import entities.persistentes.UsoTarjeta;
 import entities.persistentes.Vulnerable;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,38 +39,38 @@ public class ApiTest {
     Documento documento4 = new Documento(260611, TipoDocumento.LC);
     Documento documento5 = new Documento(3356924, TipoDocumento.DNI);
 
-    Vulnerable mati = new Vulnerable("Matias", documento1, 0);
-    Vulnerable santi = new Vulnerable("Santiago", documento2, 2);
-    Vulnerable liam = new Vulnerable("Liam", documento3, 3);
-    Vulnerable iniaki = new Vulnerable("Iniaki", documento4, 4);
-    Vulnerable augusto = new Vulnerable("Augusto", documento5, 1);
-
-    vulnerablesService.guardar(mati);
-    vulnerablesService.guardar(santi);
-    vulnerablesService.guardar(liam);
-    vulnerablesService.guardar(iniaki);
-    vulnerablesService.guardar(augusto);
+    Vulnerable santi = new Vulnerable("Santiago", documento2, null);
+    Vulnerable liam = new Vulnerable("Liam", documento3, null);
+    Vulnerable augusto = new Vulnerable("Augusto", documento5, null);
+    Vulnerable iniaki = new Vulnerable("Iniaki", documento4, List.of(augusto));
+    Vulnerable mati = new Vulnerable("Matias", documento1, List.of(augusto));
 
     Barrio almagro = new Barrio("Almagro", "CABA", "Buenos Aires");
     Barrio caballito = new Barrio("Caballito", "CABA", "Buenos Aires");
     Barrio adrogue = new Barrio("Adrogué", "Almirante Brown", "Buenos Aires");
     Barrio chacarita = new Barrio("Chacarita", "CABA", "Buenos Aires");
 
+    UsoTarjeta usoTarjetaMati = new UsoTarjeta(mati, adrogue, LocalDate.of(2013, 6, 15));
+    UsoTarjeta otraVezMati = new UsoTarjeta(mati, almagro, LocalDate.of(2024, 2, 15));
+    UsoTarjeta usoLiam27 = new UsoTarjeta(liam, caballito, LocalDate.of(2023, 4, 22));
+    UsoTarjeta usoTarjetaSanti = new UsoTarjeta(santi, chacarita, LocalDate.of(2024, 7, 23));
+    UsoTarjeta usoTarjetaIniaki = new UsoTarjeta(iniaki, almagro, LocalDate.of(2024, 1, 9));
+    UsoTarjeta usoTarjetaLiam = new UsoTarjeta(liam, chacarita, LocalDate.of(2024, 3, 15));
+
+    vulnerablesService.guardar(augusto); //El chiquito primero :)
+    vulnerablesService.guardar(mati);
+    vulnerablesService.guardar(santi);
+    vulnerablesService.guardar(liam);
+    vulnerablesService.guardar(iniaki);
+
     barriosService.guardar(almagro);
     barriosService.guardar(caballito);
     barriosService.guardar(adrogue);
     barriosService.guardar(chacarita);
 
-    UsoTarjeta usoTarjetaMati = new UsoTarjeta(mati, adrogue, LocalDate.of(2013, 6, 15));
-    UsoTarjeta otraVezMati = new UsoTarjeta(mati, almagro, LocalDate.of(2024, 2, 15));
-    UsoTarjeta usoTarjetaAugusto = new UsoTarjeta(augusto, caballito, LocalDate.of(2023, 4, 22));
-    UsoTarjeta usoTarjetaSanti = new UsoTarjeta(santi, chacarita, LocalDate.of(2024, 7, 23));
-    UsoTarjeta usoTarjetaIniaki = new UsoTarjeta(iniaki, almagro, LocalDate.of(2024, 1, 9));
-    UsoTarjeta usoTarjetaLiam = new UsoTarjeta(liam, chacarita, LocalDate.of(2024, 3, 15));
-
     usosTarjetasService.guardar(usoTarjetaMati);
     usosTarjetasService.guardar(otraVezMati);
-    usosTarjetasService.guardar(usoTarjetaAugusto);
+    usosTarjetasService.guardar(usoLiam27);
     usosTarjetasService.guardar(usoTarjetaSanti);
     usosTarjetasService.guardar(usoTarjetaIniaki);
     usosTarjetasService.guardar(usoTarjetaLiam);

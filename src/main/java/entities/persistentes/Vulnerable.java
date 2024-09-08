@@ -3,7 +3,12 @@ package entities.persistentes;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +31,9 @@ public class Vulnerable extends Persistente {
   @Embedded
   private Documento documento;
 
-  @Column(name = "cantMenoresACargo")
-  private Integer menoresAcargo;
+  @ManyToMany
+  @JoinTable(name = "menores_por_vulnerables",
+      joinColumns = @JoinColumn(name = "vulnerable_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "menor_id", referencedColumnName = "id"))
+  private List<Vulnerable> menoresAcargo;
 }

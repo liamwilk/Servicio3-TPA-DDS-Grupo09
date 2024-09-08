@@ -1,5 +1,6 @@
 package entities;
 
+import entities.persistentes.Vulnerable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class InformacionBarrio {
-  private List<String> vulnerables;
+  private List<Vulnerable> vulnerables;
   private Integer cantidad;
 
   public InformacionBarrio() {
@@ -18,7 +19,7 @@ public class InformacionBarrio {
     this.cantidad = 0;
   }
 
-  public void agregarVulnerable(String vulnerable) {
+  public void agregarVulnerable(Vulnerable vulnerable) {
     this.vulnerables.add(vulnerable);
     this.cantidad++;
   }
