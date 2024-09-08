@@ -20,7 +20,9 @@ public class VulnerablesPorBarriosCronJob {
   public static void main(String[] args) {
     RestTemplate restTemplate = new RestTemplate();
     String jsonResponse = restTemplate.getForObject("http://localhost:8080/api/atencion-medica/localidadesVulnerables", String.class);
-    //TODO: agregar logica correspondiente
+
+    // Aqui es donde se deberia realizar la logica con los datos obtenidos.
+
     log.info(jsonResponse);
   }
 }
