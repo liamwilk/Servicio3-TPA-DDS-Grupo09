@@ -5,7 +5,6 @@ import entities.persistentes.Documento;
 import entities.persistentes.TipoDocumento;
 import entities.persistentes.UsoTarjeta;
 import entities.persistentes.Vulnerable;
-import main.Main;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import repositories.BarriosService;
 import repositories.UsosTarjetasService;
 import repositories.VulnerablesService;
+import rest.AtencionMedicaApplication;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest(classes = Main.class)
+@SpringBootTest(classes = AtencionMedicaApplication.class)
 public class ApiTest {
 
   @Autowired
